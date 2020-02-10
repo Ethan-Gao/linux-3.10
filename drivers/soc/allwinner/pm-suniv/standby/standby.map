@@ -1,0 +1,182 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+                0x00000000                __standby_start = .
+
+.text           0xf0000000      0x970
+ drivers/soc/allwinner/pm-suniv/standby/main.o(.text.startup)
+ *(.text)
+ .text          0xf0000000      0x154 drivers/soc/allwinner/pm-suniv/standby/main.o
+                0xf0000000                standby_main
+ .text          0xf0000154       0xb8 drivers/soc/allwinner/pm-suniv/standby/suniv-standby.o
+                0xf0000154                save_sp
+                0xf0000160                restore_sp
+                0xf0000168                mem_flush_tlb
+                0xf0000184                mem_preload_tlb
+                0xf00001b0                disable_cache
+                0xf00001cc                disable_dcache
+                0xf00001e4                disable_icache
+ .text          0xf000020c      0x138 drivers/soc/allwinner/pm-suniv/standby/dram_sys.o
+                0xf000020c                dram_delay
+                0xf0000210                MASTER_CLOSE
+                0xf000022c                MASTER_OPEN
+                0xf0000248                gate_dram_CLK
+                0xf0000270                CSP_DRAMC_enter_selfrefresh
+                0xf0000298                CSP_DRAMC_exit_selfrefresh
+                0xf00002c0                dram_power_save_process
+                0xf00002fc                dram_power_up_process
+ .text          0xf0000344      0x62c drivers/soc/allwinner/pm-suniv/standby/standby_clock.o
+                0xf0000344                standby_delay
+                0xf0000348                standby_mdelay
+                0xf000034c                standby_clk_init
+                0xf0000368                standby_clk_exit
+                0xf0000370                standby_clk_bus2Losc
+                0xf00003c8                standby_clk_busReset
+                0xf00003e0                standby_clk_pll_disable
+                0xf000049c                standby_clk_pll_enable
+                0xf0000598                standby_clk_core2losc
+                0xf00005c8                standby_clk_core2hosc
+                0xf0000600                standby_clk_core2pll
+                0xf0000638                standby_close_24M
+                0xf0000670                standby_open_24M
+                0xf0000690                standby_clk_ldodisable
+                0xf00006ac                standby_clk_ldoenable
+                0xf00006c8                standby_clk_set_pll_factor
+                0xf0000734                standby_clk_get_pll_factor
+                0xf000078c                standby_clk_bus_src_backup
+                0xf00007b8                standby_clk_bus_src_set
+                0xf00007e0                standby_clk_bus_src_restore
+                0xf000080c                standby_clk_dramgating
+                0xf0000830                raw_lib_udiv
+                0xf00008e0                standby_clk_get_cpu_freq
+ *(.rodata)
+
+.glue_7         0xf0000970        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0xf0000970        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0xf0000970        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0xf0000970        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.data           0xf0000970        0x4
+ *(.data)
+ .data          0xf0000970        0x0 drivers/soc/allwinner/pm-suniv/standby/main.o
+ .data          0xf0000970        0x0 drivers/soc/allwinner/pm-suniv/standby/suniv-standby.o
+ .data          0xf0000970        0x0 drivers/soc/allwinner/pm-suniv/standby/dram_sys.o
+ .data          0xf0000970        0x4 drivers/soc/allwinner/pm-suniv/standby/standby_clock.o
+                0xf0000974                __bss_start = .
+
+.bss            0xf0000974       0x50
+ *(.sbss)
+ *(.scommon)
+ *(.bss)
+ .bss           0xf0000974       0x14 drivers/soc/allwinner/pm-suniv/standby/main.o
+ .bss           0xf0000988        0x0 drivers/soc/allwinner/pm-suniv/standby/suniv-standby.o
+ .bss           0xf0000988        0x0 drivers/soc/allwinner/pm-suniv/standby/dram_sys.o
+ .bss           0xf0000988       0x3c drivers/soc/allwinner/pm-suniv/standby/standby_clock.o
+ *(COMMON)
+                0xf00009c4                __bss_end = .
+                0xf00009c4                __standby_end = .
+LOAD drivers/soc/allwinner/pm-suniv/standby/main.o
+LOAD drivers/soc/allwinner/pm-suniv/standby/suniv-standby.o
+LOAD drivers/soc/allwinner/pm-suniv/standby/dram_sys.o
+LOAD drivers/soc/allwinner/pm-suniv/standby/standby_clock.o
+OUTPUT(drivers/soc/allwinner/pm-suniv/standby/standby.elf elf32-littlearm)
+
+.debug_abbrev   0x00000000      0x544
+ .debug_abbrev  0x00000000      0x1a5 drivers/soc/allwinner/pm-suniv/standby/main.o
+ .debug_abbrev  0x000001a5      0x112 drivers/soc/allwinner/pm-suniv/standby/dram_sys.o
+ .debug_abbrev  0x000002b7      0x28d drivers/soc/allwinner/pm-suniv/standby/standby_clock.o
+
+.debug_info     0x00000000     0x18ff
+ .debug_info    0x00000000      0x42c drivers/soc/allwinner/pm-suniv/standby/main.o
+ .debug_info    0x0000042c      0x21f drivers/soc/allwinner/pm-suniv/standby/dram_sys.o
+ .debug_info    0x0000064b     0x12b4 drivers/soc/allwinner/pm-suniv/standby/standby_clock.o
+
+.debug_line     0x00000000      0x55f
+ .debug_line    0x00000000      0x197 drivers/soc/allwinner/pm-suniv/standby/main.o
+ .debug_line    0x00000197      0x10b drivers/soc/allwinner/pm-suniv/standby/dram_sys.o
+ .debug_line    0x000002a2      0x2bd drivers/soc/allwinner/pm-suniv/standby/standby_clock.o
+
+.debug_loc      0x00000000      0x493
+ .debug_loc     0x00000000       0x3f drivers/soc/allwinner/pm-suniv/standby/main.o
+ .debug_loc     0x0000003f       0x3b drivers/soc/allwinner/pm-suniv/standby/dram_sys.o
+ .debug_loc     0x0000007a      0x419 drivers/soc/allwinner/pm-suniv/standby/standby_clock.o
+
+.debug_pubnames
+                0x00000000      0x345
+ .debug_pubnames
+                0x00000000       0x23 drivers/soc/allwinner/pm-suniv/standby/main.o
+ .debug_pubnames
+                0x00000023       0xc9 drivers/soc/allwinner/pm-suniv/standby/dram_sys.o
+ .debug_pubnames
+                0x000000ec      0x259 drivers/soc/allwinner/pm-suniv/standby/standby_clock.o
+
+.debug_pubtypes
+                0x00000000      0x2ac
+ .debug_pubtypes
+                0x00000000       0x59 drivers/soc/allwinner/pm-suniv/standby/main.o
+ .debug_pubtypes
+                0x00000059       0x12 drivers/soc/allwinner/pm-suniv/standby/dram_sys.o
+ .debug_pubtypes
+                0x0000006b      0x241 drivers/soc/allwinner/pm-suniv/standby/standby_clock.o
+
+.debug_aranges  0x00000000       0x60
+ .debug_aranges
+                0x00000000       0x20 drivers/soc/allwinner/pm-suniv/standby/main.o
+ .debug_aranges
+                0x00000020       0x20 drivers/soc/allwinner/pm-suniv/standby/dram_sys.o
+ .debug_aranges
+                0x00000040       0x20 drivers/soc/allwinner/pm-suniv/standby/standby_clock.o
+
+.debug_str      0x00000000      0xcc9
+ .debug_str     0x00000000      0x489 drivers/soc/allwinner/pm-suniv/standby/main.o
+                                0x4ca (size before relaxing)
+ .debug_str     0x00000489       0xb3 drivers/soc/allwinner/pm-suniv/standby/dram_sys.o
+                                0x1a9 (size before relaxing)
+ .debug_str     0x0000053c      0x78d drivers/soc/allwinner/pm-suniv/standby/standby_clock.o
+                                0xa4f (size before relaxing)
+
+.comment        0x00000000       0x2a
+ .comment       0x00000000       0x2a drivers/soc/allwinner/pm-suniv/standby/main.o
+                                 0x2b (size before relaxing)
+ .comment       0x00000000       0x2b drivers/soc/allwinner/pm-suniv/standby/dram_sys.o
+ .comment       0x00000000       0x2b drivers/soc/allwinner/pm-suniv/standby/standby_clock.o
+
+.note.GNU-stack
+                0x00000000        0x0
+ .note.GNU-stack
+                0x00000000        0x0 drivers/soc/allwinner/pm-suniv/standby/main.o
+ .note.GNU-stack
+                0x00000000        0x0 drivers/soc/allwinner/pm-suniv/standby/dram_sys.o
+ .note.GNU-stack
+                0x00000000        0x0 drivers/soc/allwinner/pm-suniv/standby/standby_clock.o
+
+.ARM.attributes
+                0x00000000       0x2b
+ .ARM.attributes
+                0x00000000       0x2d drivers/soc/allwinner/pm-suniv/standby/main.o
+ .ARM.attributes
+                0x0000002d       0x1d drivers/soc/allwinner/pm-suniv/standby/suniv-standby.o
+ .ARM.attributes
+                0x0000004a       0x2d drivers/soc/allwinner/pm-suniv/standby/dram_sys.o
+ .ARM.attributes
+                0x00000077       0x2d drivers/soc/allwinner/pm-suniv/standby/standby_clock.o
+
+.debug_frame    0x00000000      0x258
+ .debug_frame   0x00000000       0x30 drivers/soc/allwinner/pm-suniv/standby/main.o
+ .debug_frame   0x00000030       0x98 drivers/soc/allwinner/pm-suniv/standby/dram_sys.o
+ .debug_frame   0x000000c8      0x190 drivers/soc/allwinner/pm-suniv/standby/standby_clock.o
+
+.debug_ranges   0x00000000       0x30
+ .debug_ranges  0x00000000       0x30 drivers/soc/allwinner/pm-suniv/standby/dram_sys.o
